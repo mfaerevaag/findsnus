@@ -7,3 +7,5 @@
 meteor-platform
 meteortypescript:compiler
 meteortypescript:typescript-libs
+fourseven:scss
+reywood:bootstrap3-sass

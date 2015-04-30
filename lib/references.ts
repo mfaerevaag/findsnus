@@ -4,3 +4,4 @@
 /// <reference path="../server/bootstrap.ts" />
 /// <reference path="../server/publish.ts" />
 /// <reference path="../client/index.ts" />
+/// <reference path="../client/contact.ts" />

@@ -1,0 +1,42 @@
+<template name="contact">
+    <div class="contact-btn">
+        <a href="#">Kender du en?</a>
+    </div>
+
+    <div class="contact">
+        <form class="new-shop">
+            <div class="form-group col-sm-14 {{errorEmail}}">
+                <label class="control-label">Din mail</label>
+                <input class="form-control" type="text" size="30" name="email" />
+            </div>
+
+            <div class="form-group col-sm-14 {{errorName}}">
+                <label class="control-label">Navn på butik</label>
+                <input class="form-control" type="text" size="30" name="name" />
+            </div>
+
+            <div class="form-group col-sm-14 {{errorPosition}}">
+                <label class="control-label">Koordinater</label>
+                <small>f.eks. 55.687881, 12.554193</small>
+                <input class="form-control" type="text" size="30" name="position" />
+            </div>
+
+            <div class="form-group col-sm-14 {{errorPrice}}">
+                <label class="control-label">Pris</label>
+                <input class="form-control" type="text" size="30" name="price" />
+            </div>
+
+            <div class="form-group col-sm-14 {{errorSelection}}">
+                <label class="control-label">Udvalg</label>
+                <small>f.eks. Godt, Semi, Dårlig</small>
+                <input class="form-control" type="text" size="30" name="selection" />
+            </div>
+
+            <button class="btn btn-default" type="submit">Indsende</button>
+
+            {{#if feedback}}
+                <p><br>{{feedback}}</p>
+            {{/if}}
+        </form>
+    </div>
+</template>

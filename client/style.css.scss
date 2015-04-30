@@ -1,0 +1,39 @@
+@import '../.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap';
+
+html, body, #map-canvas {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-btn {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+
+  background-color: white;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border: 2px solid #ebebeb;
+  padding: 5px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.contact {
+  // display: none;
+
+  position: absolute;
+  left: 100px;
+  top: 50px;
+
+  background-color: white;
+
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border: 2px solid #ebebeb;
+  padding: 8px;
+}
