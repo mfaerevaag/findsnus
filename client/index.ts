@@ -1,4 +1,4 @@
-declare var map: google.maps.Map;
+Meteor.subscribe('shops');
 
 Template['map'].rendered = function() {
     var mapOptions = {
@@ -6,7 +6,7 @@ Template['map'].rendered = function() {
         zoom: 14
     };
 
-    map = new google.maps.Map(document.getElementById('map-canvas'),
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
                               mapOptions);
 
     Tracker.autorun(function() {
