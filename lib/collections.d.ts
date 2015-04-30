@@ -4,6 +4,8 @@ interface ShopDAO {
     lat: number;
     lng: number;
     price: number;
+    submitted_by?: string;
+    verified: boolean;
 }
 
 declare var Shops:Mongo.Collection<ShopDAO>;

@@ -46,14 +46,15 @@ Template['contact'].events({
         var hasErrors = false;
 
         var email = e.target.email.value.trim()
-        var values: _.Dictionary<{}> = {
+        var values: _.Dictionary<string> = {
             name: e.target.name.value.trim(),
             position: e.target.position.value.trim(),
-            price: e.target.price.value.trim(),
+            price: parseInt(e.target.price.value.trim()),
             selection: e.target.selection.value.trim()
         };
 
         // check fields
+
         _.map(_.extend({}, {email: email}, values), (value, key) => {
             if (value == '') {
                 hasErrors = true;
@@ -64,22 +65,38 @@ Template['contact'].events({
             }
         });
 
-        if (hasErrors) {
+        var latlng = values['position'].split(',');
+
+        if (latlng.length != 2) {
+            Session.set('contact-feedback', 'Dine koordinater er fejl formateret');
+            return false
+        }
+        else if (hasErrors) {
             Session.set('contact-feedback', 'Du skal fylde det hele ud jo');
             return false;
         }
 
-        var captcha = grecaptcha.getResponse();
-        // var captcha = {};
+        // go
 
-        Meteor.call('submitShop', email, values, captcha, (error, result) => {
+
+        var shop = {
+            name: values['name'],
+            lat: parseFloat(latlng[0].trim()),
+            lng: parseFloat(latlng[1].trim()),
+            price: parseInt(values['price']),
+            selection: values['selection']
+        }
+
+        console.log(shop);
+
+        var captcha = grecaptcha.getResponse();
+
+        Meteor.call('submitShop', email, shop, captcha, (error, result) => {
             if (!!error) {
                 console.error(error);
                 Session.set('contact-feedback', 'Det har sked en fejl :\'-(');
 
             } else {
-                console.log('result: ' + result);
-
                 e.target.reset();
                 Session.set('contact-feedback', 'Jamand, tak for det!');
             }
@@ -88,7 +105,3 @@ Template['contact'].events({
         return false;
     }
 });
-
-// Template['contact'].rendered = function() {
-//     console.log(grecaptcha);
-// };
