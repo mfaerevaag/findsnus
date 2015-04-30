@@ -6,8 +6,10 @@ Meteor.startup(function () {
     _.each(shops, (shop) => {
         Shops.insert({
             name: shop['name'],
-            lat: shop['lat'],
-            lng: shop['lng']
+            lat: parseFloat(shop['lat']),
+            lng: parseFloat(shop['lng']),
+            price: parseInt(shop['price']),
+            selection: shop['selection']
         });
     });
 });

@@ -2,11 +2,36 @@
     {
         "name": "Shop 'n' Play",
         "lat": "55.682645",
-        "lng": "12.550369"
+        "lng": "12.550369",
+        "price": "45",
+        "selection": "Godt"
+    },
+    {
+        "name": "Quick Service Kiosk",
+        "lat": "55.687881",
+        "lng": "12.554193",
+        "price": "?",
+        "selection": "Semi"
+    },
+    {
+        "name": "Mimers Kiosk",
+        "lat": "55.700681",
+        "lng": "12.544037",
+        "price": "?",
+        "selection": "Dårlig"
+    },
+    {
+        "name": "1001 Nat",
+        "lat": "55.6685769",
+        "lng": "12.5511813",
+        "price": "?",
+        "selection": "Semi"
     },
     {
         "name": "Candy Kiosk",
         "lat": "55.6857",
-        "lng": "12.5389"
+        "lng": "12.5389",
+        "price": "40",
+        "selection": "Godt"
     }
 ]
