@@ -1,4 +1,13 @@
 Meteor.startup(function () {
-    // code to run on server at startup
-    console.log('HELLO');
+    Shops.remove({});
+
+    var shops = JSON.parse(Assets.getText('data.json'));
+
+    _.each(shops, (shop) => {
+        Shops.insert({
+            name: shop['name'],
+            lat: shop['lat'],
+            lng: shop['lng']
+        });
+    });
 });
