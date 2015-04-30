@@ -32,10 +32,14 @@
                 <input class="form-control" type="text" size="30" name="selection" />
             </div>
 
+            <!-- <div class="g-recaptcha" data-sitekey="6LeGLQYTAAAAAPPqbS4IqQjO4cFH4FhG0odCUIqB"></div><br> -->
+            {{> reCAPTCHA}}
+            <br>
+
             <button class="btn btn-default" type="submit">Indsende</button>
 
             {{#if feedback}}
-                <p><br>{{feedback}}</p>
+                <p class="lead"><br>{{feedback}}</p>
             {{/if}}
         </form>
     </div>

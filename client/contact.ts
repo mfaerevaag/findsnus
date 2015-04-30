@@ -41,27 +41,26 @@ Template['contact'].events({
     },
 
     'submit .new-shop': (e) => {
-        var email = e.target.email.value
-        var name = e.target.name.value
-        var position = e.target.position.value
-        var price = e.target.price.value
-        var selection = e.target.selection.value
+        e.preventDefault();
 
         var hasErrors = false;
 
-        _.each([
-            { name: "email", value: email },
-            { name: "name", value: name },
-            { name: "position", value: position },
-            { name: "price", value: price },
-            { name: "selection", value: selection }
-        ], (field) => {
-            if (field.value == '') {
+        var email = e.target.email.value.trim()
+        var values: _.Dictionary<{}> = {
+            name: e.target.name.value.trim(),
+            position: e.target.position.value.trim(),
+            price: e.target.price.value.trim(),
+            selection: e.target.selection.value.trim()
+        };
+
+        // check fields
+        _.map(_.extend({}, {email: email}, values), (value, key) => {
+            if (value == '') {
                 hasErrors = true;
-                Session.set('error-' + field.name, true);
-                console.log('error-' + field.name);
+                Session.set('error-' + key, true);
+                console.log('error-' + key);
             } else {
-                Session.set('error-' + field.name, false);
+                Session.set('error-' + key, false);
             }
         });
 
@@ -70,14 +69,10 @@ Template['contact'].events({
             return false;
         }
 
-        var values = {
-            name: name,
-            position: position,
-            price: price,
-            selection: selection
-        };
+        var captcha = grecaptcha.getResponse();
+        // var captcha = {};
 
-        Meteor.call('submitShop', email, values, (error, result) => {
+        Meteor.call('submitShop', email, values, captcha, (error, result) => {
             if (!!error) {
                 console.error(error);
                 Session.set('contact-feedback', 'Det har sked en fejl :\'-(');
@@ -93,3 +88,7 @@ Template['contact'].events({
         return false;
     }
 });
+
+// Template['contact'].rendered = function() {
+//     console.log(grecaptcha);
+// };
