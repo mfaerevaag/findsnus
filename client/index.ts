@@ -1,4 +1,5 @@
 Template['map'].rendered = function() {
+    GAnalytics.pageview();
     this.subscribe('shops');
 
     var map = new google.maps.Map($('#map-canvas')[0], {
