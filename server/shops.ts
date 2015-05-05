@@ -7,7 +7,6 @@ Meteor.methods({
     'submitShop': function (email: string, shop: ShopDAO, captcha: string) {
         console.log(email);
         console.log(shop);
-        console.log(captcha);
 
         if (!validateEmail(email)) {
             throw new Meteor.Error('invalid email address');

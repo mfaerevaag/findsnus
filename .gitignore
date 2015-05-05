@@ -1,1 +1,4 @@
 /zzz.ts-compiler.ts
+.tern-port
+/private/config.json
+/*.tar.gz

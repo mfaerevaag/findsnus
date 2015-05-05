@@ -1,10 +1,16 @@
+declare var CONFIG;
+
 Meteor.startup(() => {
+
+    CONFIG = JSON.parse(Assets.getText('config.json'));
+
     reCAPTCHA.config({
-        privatekey: '6LeGLQYTAAAAAEvhDupt4zs9yRWANqv4ZP3fnpQ_'
+        privatekey: CONFIG.recaptcha.privatekey
     });
 
-    Shops.remove({});
+    // Shops.remove({}); // for dev
 
+    // parse hardcoded
     var shops = JSON.parse(Assets.getText('data.json'));
 
     _.each(shops, (shop) => {
