@@ -6,7 +6,10 @@ Template['map'].rendered = function() {
         zoom: 14
     });
 
+    var openInfoWindow = null;
+
     this.autorun(function() {
+
         Shops.find().forEach((shop) => {
 
             var marker = new google.maps.Marker({
@@ -24,8 +27,14 @@ Template['map'].rendered = function() {
                 })
             });
 
+
             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
+                if (openInfoWindow)
+                    openInfoWindow.close();
+
+                infowindow.open(map, marker);
+
+                openInfoWindow = infowindow;
             });
         });
     });
