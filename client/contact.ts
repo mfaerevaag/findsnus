@@ -129,6 +129,9 @@ Template['contact'].events({
                 e.target.reset();
                 Session.set('contact-feedback', 'Perfekt, tak for det!');
             }
+
+            // Remove the location selection marker
+            marker.setMap(null);
         });
 
         return false;
