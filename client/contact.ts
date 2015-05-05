@@ -68,11 +68,11 @@ Template['contact'].events({
         var latlng = values['position'].split(',');
 
         if (latlng.length != 2) {
-            Session.set('contact-feedback', 'Dine koordinater er fejl formateret');
+            Session.set('contact-feedback', 'Dine koordinater er formateret forkert');
             return false
         }
         else if (hasErrors) {
-            Session.set('contact-feedback', 'Du skal fylde det hele ud jo');
+            Session.set('contact-feedback', 'Du skal fylde det hele ud!');
             return false;
         }
 
@@ -94,11 +94,11 @@ Template['contact'].events({
         Meteor.call('submitShop', email, shop, captcha, (error, result) => {
             if (!!error) {
                 console.error(error);
-                Session.set('contact-feedback', 'Det har sked en fejl :\'-(');
+                Session.set('contact-feedback', 'Der er sket en fejl :\'-(');
 
             } else {
                 e.target.reset();
-                Session.set('contact-feedback', 'Jamand, tak for det!');
+                Session.set('contact-feedback', 'Perfekt, tak for det!');
             }
         });
 
