@@ -5,7 +5,7 @@ Template['map'].rendered = function() {
     this.subscribe('shops');
 
     gmap = new google.maps.Map($('#map-canvas')[0], {
-        center: new google.maps.LatLng(55.6778724, 12.5623695),
+        center: new google.maps.LatLng(55.683341, 12.562026),
         zoom: 14
     });
 
