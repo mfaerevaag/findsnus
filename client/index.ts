@@ -1,9 +1,11 @@
+declare var gmap: google.maps.Map;
+
 Template['map'].rendered = function() {
     GAnalytics.pageview();
     this.subscribe('shops');
 
-    var map = new google.maps.Map($('#map-canvas')[0], {
-        center: new google.maps.LatLng(55.6778724, 12.5623695),
+    gmap = new google.maps.Map($('#map-canvas')[0], {
+        center: new google.maps.LatLng(55.683341, 12.562026),
         zoom: 14
     });
 
@@ -18,7 +20,7 @@ Template['map'].rendered = function() {
                 position: new google.maps.LatLng(shop.lat, shop.lng),
             });
 
-            marker.setMap(map);
+            marker.setMap(gmap);
 
             var infowindow = new google.maps.InfoWindow({
                 content: Blaze.toHTMLWithData(Template['info'], {
@@ -33,7 +35,7 @@ Template['map'].rendered = function() {
                 if (openInfoWindow)
                     openInfoWindow.close();
 
-                infowindow.open(map, marker);
+                infowindow.open(gmap, marker);
 
                 openInfoWindow = infowindow;
             });

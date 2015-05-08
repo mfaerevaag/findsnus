@@ -18,6 +18,6 @@ Meteor.methods({
             throw new Meteor.Error('reCAPTCHA Failed: ' + verifyCaptcha.error);
         }
 
-        return Shops.insert(_.extend(shop, { submitted_by: email, validated: false }));
+        return Shops.insert(_.extend(shop, { submitted_by: email, verified: false }));
     }
 });

@@ -29,6 +29,10 @@ Template['contact'].helpers({
     }
 });
 
+var marker: google.maps.Marker;
+
+Template['contact'].coords = () => Session.get('coords');
+
 Template['contact'].events({
     'click .contact-btn': () => {
         var $contact = $('.contact');
@@ -40,6 +44,31 @@ Template['contact'].events({
         }
     },
 
+    'click .select-location': (event) => {
+        gmap.set('draggableCursor', 'crosshair');
+
+        var listener = google.maps.event.addListener(gmap, 'click', (event) => {
+            if (marker)
+                marker.setMap(null);
+
+            marker = new google.maps.Marker({
+                position: event.latLng,
+                icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            });
+
+            marker.setMap(gmap);
+
+            Session.set('coords', event.latLng.A + "," + event.latLng.F);
+
+            // remove event and reset cursor
+            google.maps.event.removeListener(listener);
+            gmap.set('draggableCursor', 'grab');
+        });
+
+        // Prevent form submit
+        event.preventDefault();
+    },
+
     'submit .new-shop': (e) => {
         e.preventDefault();
 
@@ -48,7 +77,7 @@ Template['contact'].events({
         var email = e.target.email.value.trim()
         var values: _.Dictionary<string> = {
             name: e.target.name.value.trim(),
-            position: e.target.position.value.trim(),
+            position: Session.get('coords').trim(),
             price: parseInt(e.target.price.value.trim()),
             selection: e.target.selection.value.trim()
         };
@@ -100,6 +129,9 @@ Template['contact'].events({
                 e.target.reset();
                 Session.set('contact-feedback', 'Perfekt, tak for det!');
             }
+
+            // Remove the location selection marker
+            marker.setMap(null);
         });
 
         return false;
