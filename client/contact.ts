@@ -31,6 +31,13 @@ Template['contact'].helpers({
 
 var marker: google.maps.Marker;
 
+var resetMarker = () => {
+    if (marker)
+        marker.setMap(null);
+
+
+};
+
 Template['contact'].coords = () => Session.get('coords');
 
 Template['contact'].events({
@@ -39,6 +46,7 @@ Template['contact'].events({
 
         if ($contact.is(':visible')) {
             $contact.hide(300);
+            resetMarker();
         } else {
             $contact.show(300);
         }
@@ -48,8 +56,7 @@ Template['contact'].events({
         gmap.set('draggableCursor', 'crosshair');
 
         var listener = google.maps.event.addListener(gmap, 'click', (event) => {
-            if (marker)
-                marker.setMap(null);
+            resetMarker();
 
             marker = new google.maps.Marker({
                 position: event.latLng,
@@ -128,10 +135,8 @@ Template['contact'].events({
             } else {
                 e.target.reset();
                 Session.set('contact-feedback', 'Perfekt, tak for det!');
+                resetMarker();
             }
-
-            // Remove the location selection marker
-            marker.setMap(null);
         });
 
         return false;
