@@ -4,23 +4,23 @@ Template['map'].rendered = function() {
     GAnalytics.pageview();
     this.subscribe('shops');
 
-    gmap = new google.maps.Map($('#map-canvas')[0], {
-        center: new google.maps.LatLng(55.683341, 12.562026),
-        zoom: 14
-    });
+    gmap = new google.maps.Map($('#map-canvas')[0]);
 
     var openInfoWindow = null;
 
     this.autorun(function() {
+
+        var bounds = new google.maps.LatLngBounds();
 
         Shops.find().forEach((shop) => {
 
             var marker = new google.maps.Marker({
                 title: shop.name,
                 position: new google.maps.LatLng(shop.lat, shop.lng),
+                map: gmap
             });
 
-            marker.setMap(gmap);
+            bounds.extend(marker.getPosition());
 
             var infowindow = new google.maps.InfoWindow({
                 content: Blaze.toHTMLWithData(Template['info'], {
@@ -40,5 +40,7 @@ Template['map'].rendered = function() {
                 openInfoWindow = infowindow;
             });
         });
+
+        gmap.fitBounds(bounds);
     });
 };
